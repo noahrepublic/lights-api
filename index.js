@@ -12,15 +12,6 @@ app.use( express.json() );
 let last_request_time = null;
 const rate_limit = 15 * 1000;
 
-/*axios.get('https://discovery.meethue.com/')
-    .then( response => {
-        bridge = response.data[0].internalipaddress;
-        console.log(bridge);
-    })
-    .catch( error => console.error(error.message) );
-*/
-
-// Functions //
 
 axios.get(`https://${ipAddress}/api/${username}/lights/`)
     .then( response => {
@@ -53,7 +44,6 @@ app.post('/:H/:S/:B', (req, res) => {
 
     let on = true;
 
-    console.log(typeof H, typeof S, typeof B);
     axios.get(`https://${ipAddress}/api/${username}/lights/`)
     axios.put(`https://${ipAddress}/api/${username}/lights/${lightId}/state/${lightId}`, {
         on,

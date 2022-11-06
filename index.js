@@ -3,11 +3,11 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const { username, ipAddress, serverAddress } = require('./config');
-const PORT = 8080;
+const PORT = 80;
 
-var http = require('http').createServer(app);
+const http = require('http').createServer(app);
 
-http.listen(PORT, serverAddress, () => console.log(`Server listening on port ${PORT}`));
+http.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 
 app.use( express.json() );
 

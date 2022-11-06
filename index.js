@@ -24,7 +24,7 @@ const lights = new Map
 
 app.post('/:H/:S/:B', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
-        res.error('Server is rate limited');
+        res.send('Server is rate limited');
         return;
     }
     last_request_time = Date.now();
@@ -52,18 +52,18 @@ app.post('/:H/:S/:B', (req, res) => {
         ... (B && { bri: parseInt(B) }),
 
     }) 
-        .then( response => res.send(response) )
+        .then( response => res.send("Sucess!") )
         .catch( error => res.send(error) );
 })
 
 app.post('/off', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
-        res.error('Server is rate limited');
+        res.send('Server is rate limited');
         return;
     }
     last_request_time = Date.now();
     if (!ipAddress) {
-        res.send('Bridge was not found, server is rate limited');
+        res.send('Bridge was not found, we are being rate limited');
         return;
     }
     let identifier = req.body.identifier;
@@ -79,6 +79,6 @@ app.post('/off', (req, res) => {
     axios.put(`https://${ipAddress}/api/${username}/lights/${lightId}/state/${lightId}`, {
         on,
     }) 
-        .then( response => res.send(response) )
+        .then( response => res.send("Sucess!") )
         .catch( error => res.send(error) );
 })

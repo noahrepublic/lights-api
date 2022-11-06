@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const { username, ipAddress } = require('./config');
-const PORT = 80;
+const PORT = 8080;
 
 app.listen(PORT, "NODE", () => console.log(`Server listening on port ${PORT}`));
 

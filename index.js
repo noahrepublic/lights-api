@@ -2,16 +2,33 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const { username, ipAddress } = require('./config');
+const io = require('socket.io');
+const { username, ipAddress, serverAddress } = require('./config');
 const PORT = 8080;
 
-app.listen(PORT, "NODE", () => console.log(`Server listening on port ${PORT}`));
+var http = require('http').createServer(app);
+
+http.listen(PORT, '0.0.0.0', () => console.log(`Server listening on port ${PORT}`));
 
 app.use( express.json() );
+
+const ioServer = new io.Server(http, {
+    cors: {
+        origin: `${serverAddress}:80`,
+    }
+});
 
 let last_request_time = null;
 const rate_limit = 15 * 1000;
 
+
+ioServer.on('connection', function(socket){
+    console.log('a user connected');
+});
+
+ioServer.on('connect_error', (error) => {
+    console.log('connect_error', error);
+});
 
 axios.get(`https://${ipAddress}/api/${username}/lights/`)
     .then( response => {

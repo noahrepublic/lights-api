@@ -24,7 +24,7 @@ const lights = new Map
 
 app.post('/:H/:S/:B', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
-        res.send('Server is rate limited');
+        res.error('Server is rate limited');
         return;
     }
     last_request_time = Date.now();
@@ -58,7 +58,7 @@ app.post('/:H/:S/:B', (req, res) => {
 
 app.post('/off', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
-        res.send('Server is rate limited');
+        res.error('Server is rate limited');
         return;
     }
     last_request_time = Date.now();

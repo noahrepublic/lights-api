@@ -7,7 +7,7 @@ const PORT = 80;
 
 const http = require('http').createServer(app);
 
-http.listen(PORT, serverAddress ,() => console.log(`Server listening on port ${PORT}`));
+http.listen(PORT, `http://${serverAddress}` ,() => console.log(`Server listening on port ${PORT}`));
 
 app.use( express.json() );
 
@@ -34,7 +34,7 @@ axios.get(`https://${ipAddress}/api/${username}/lights/`)
 
 const lights = new Map
 
-app.post('/:H/:S/:B', (req, res) => {
+app.post('/:H/:S/:B/', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
         res.send('Server is rate limited');
         return;
@@ -68,7 +68,7 @@ app.post('/:H/:S/:B', (req, res) => {
         .catch( error => res.send(error) );
 })
 
-app.post('/off', (req, res) => {
+app.post('/off/', (req, res) => {
     if (last_request_time && Date.now() - last_request_time < rate_limit) {
         res.error('Server is rate limited');
         return;

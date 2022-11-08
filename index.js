@@ -64,7 +64,7 @@ app.post('/:H/:S/:B', (req, res) => {
         ... (B && { bri: parseInt(B) }),
 
     }) 
-        .then( response => res.send("Sucess!") )
+        .then( response => res.send("Success!") )
         .catch( error => res.send(error) );
 })
 
@@ -91,6 +91,6 @@ app.post('/off', (req, res) => {
     axios.put(`https://${ipAddress}/api/${username}/lights/${lightId}/state/${lightId}`, {
         on,
     }) 
-        .then( response => res.send("Sucess!") )
+        .then( response => res.send("Success!") )
         .catch( error => res.send(error) );
 })

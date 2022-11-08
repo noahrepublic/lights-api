@@ -7,7 +7,7 @@ const PORT = 80;
 
 const http = require('http').createServer(app);
 
-http.listen(PORT, `http://${serverAddress}` ,() => console.log(`Server listening on port ${PORT}`));
+http.listen(PORT, serverAddress ,() => console.log(`Server listening on port ${PORT}`));
 
 app.use( express.json() );
 
